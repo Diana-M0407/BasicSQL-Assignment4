@@ -68,3 +68,15 @@ VALUES ('Johnson', 25, 1, 'Math');
 // Insert a new course, <’Object Oriented Programming’,’CS1210’, 3, ‘CS’>, in the database
 INSERT INTO COURSE (Course_name, Course_number, Credit_hours, Department)
 VALUES ('Object Oriented Programming', 'CS1210', 3, 'CS');
+
+// Update the class of student ‘Smith’ to 3.
+UPDATE STUDENT
+SET Class = 3
+WHERE Name = 'Smith';
+
+// Update the instructor for session 112 in Fall 2008 to King.
+UPDATE SECTION
+SET instructor = 'King'
+WHERE Section_identifier = 112
+  AND Semester = 'Fall'
+  AND Year = 2008;
