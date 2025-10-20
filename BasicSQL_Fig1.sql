@@ -61,3 +61,10 @@ WHERE s.instructor = 'Anderson'
 GROUP BY c.course_no, s.semester, s.year, s.section_id
 ORDER BY s.year, s.semester, c.course_no, s.section_id;
 
+// Insert a new student, <’Johnson’, 25, 1, ‘Math’>, in the database.
+INSERT INTO STUDENT (name, Student_number, class, major)
+VALUES ('Johnson', 25, 1, 'Math');
+
+// Insert a new course, <’Object Oriented Programming’,’CS1210’, 3, ‘CS’>, in the database
+INSERT INTO COURSE (Course_name, Course_number, Credit_hours, Department)
+VALUES ('Object Oriented Programming', 'CS1210', 3, 'CS');
