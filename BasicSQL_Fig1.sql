@@ -26,45 +26,44 @@ Write the following queries based on the database schema in Figure 1.
 /*
 1. Retrieve all course numbers and names, along with their prerequisite course numbers and names.
 */
-SELECT  c.course_no       AS course_no,
-        c.title           AS course_title,
-        p.prereq_no       AS prereq_no,
-        cp.title          AS prereq_title
-FROM PREREQUISITE p
-JOIN COURSE c  ON c.course_no  = p.course_no
-JOIN COURSE cp ON cp.course_no = p.prereq_no
-ORDER BY c.course_no, p.prereq_no;
+SELECT  C.Course_number      AS CourseNumber,
+        C.Course_name        AS CourseName,
+        P.Prerequisite_number AS PrereqCourseNumber,
+        C2.Course_name       AS PrereqCourseName
+FROM PREREQUISITE P
+JOIN COURSE C  ON C.Course_number  = P.Course_number
+JOIN COURSE C2 ON C2.Course_number = P.Prerequisite_number
+ORDER BY C.Course_number;
 
 
 /*
 2.Retrieve all course numbers and names for courses taught by Professor Anderson in 2007 and 2008.
 */
-SELECT DISTINCT c.course_no, c.title
-FROM SECTION s
-JOIN COURSE  c ON c.course_no = s.course_no
-WHERE s.instructor = 'Anderson'
-  AND s.year IN (2007, 2008);
-
+SELECT DISTINCT C.Course_number, C.Course_name
+FROM COURSE C
+JOIN SECTION S ON C.Course_number = S.Course_number
+WHERE S.Instructor = 'Anderson'
+  AND S.Year IN (2007, 2008);
 
 /*
 3. For each section taught by Professor Anderson, retrieve all course numbers, semesters, years, and the number of students enrolled in each section.
 */
-SELECT  c.course_no,
-        s.semester,
-        s.year,
-        s.section_id,
-        COUNT(gr.student_id) AS num_students
-FROM SECTION s
-JOIN COURSE c    ON c.course_no = s.course_no
-LEFT JOIN GRADE_REPORT gr ON gr.section_id = s.section_id   -- or ENROLL
-WHERE s.instructor = 'Anderson'
-GROUP BY c.course_no, s.semester, s.year, s.section_id
-ORDER BY s.year, s.semester, c.course_no, s.section_id;
+SELECT  C.Course_number,
+        S.Semester,
+        S.Year,
+        COUNT(G.Student_number) AS NumStudents
+FROM SECTION S
+JOIN COURSE C       ON C.Course_number = S.Course_number
+LEFT JOIN GRADE_REPORT G ON G.Section_identifier = S.Section_identifier
+WHERE S.Instructor = 'Anderson'
+GROUP BY C.Course_number, S.Semester, S.Year
+ORDER BY S.Year, S.Semester;
+
 
 /* 
 4. Insert a new student, <’Johnson’, 25, 1, ‘Math’>, in the database.
 */
-INSERT INTO STUDENT (Name, Student_number, class, major)
+INSERT INTO STUDENT (Name, Student_number, Class, Major)
 VALUES ('Johnson', 25, 1, 'Math');
 
 /* 
@@ -87,37 +86,37 @@ UPDATE SECTION
 SET Instructor = 'King'
 WHERE Section_identifier = 112
   AND Semester = 'Fall'
-  AND Year = 08;
+  AND Year = 2008;
 
 /* 
 8. Update Smith’s grade for class CS1310 in Fall 2008 to a B.
 */
-UPDATE GRADE_REPORT gr
-JOIN STUDENT s  ON s.student_id  = gr.student_id
-JOIN SECTION sec ON sec.section_id = gr.section_id
-JOIN COURSE c   ON c.course_no   = sec.course_no
-SET gr.grade = 'B'
-WHERE s.sname = 'Smith'
-  AND c.course_no = 'CS1310'
-  AND sec.semester = 'Fall'
-  AND sec.year = 2008;
+UPDATE GRADE_REPORT G
+JOIN STUDENT S  ON S.Student_number = G.Student_number
+JOIN SECTION Sec ON Sec.Section_identifier = G.Section_identifier
+JOIN COURSE C  ON C.Course_number = Sec.Course_number
+SET G.Grade = 'B'
+WHERE S.Name = 'Smith'
+  AND C.Course_number = 'CS1310'
+  AND Sec.Semester = 'Fall'
+  AND Sec.Year = 2008;
+
 
 
 
 /* 
 9. Delete all sections taught by Prof. Stone.
 */
-DELETE FROM SECTION
-WHERE Instructor = 'Stone';
-/*
-DELETE gr
-FROM GRADE_REPORT gr
-JOIN SECTION s ON s.section_id = gr.section_id
-WHERE s.instructor = 'Stone';
+
+DELETE FROM GRADE_REPORT
+WHERE Section_identifier IN (
+    SELECT Section_identifier
+    FROM SECTION
+    WHERE Instructor = 'Stone'
+);
 
 DELETE FROM SECTION
-WHERE instructor = 'Stone';
-*/
+WHERE Instructor = 'Stone';
 
 
 
@@ -125,10 +124,10 @@ WHERE instructor = 'Stone';
 10. Remove the Discrete Mathematics prerequisite from a database course.
 */
 
-DELETE p
-FROM PREREQUISITE p
-JOIN COURSE c_course  ON c_course.course_no  = p.course_no
-JOIN COURSE c_prereq  ON c_prereq.course_no  = p.prereq_no
-WHERE c_course.title  LIKE '%Database%'
-  AND c_prereq.title  = 'Discrete Mathematics';
+DELETE P
+FROM PREREQUISITE P
+JOIN COURSE C1 ON C1.Course_number = P.Course_number
+JOIN COURSE C2 ON C2.Course_number = P.Prerequisite_number
+WHERE C1.Course_name = 'Database'
+  AND C2.Course_name = 'Discrete Mathematics';
 
