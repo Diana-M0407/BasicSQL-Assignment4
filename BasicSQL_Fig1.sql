@@ -89,7 +89,7 @@ WHERE Section_identifier = 112
   AND Semester = 'Fall'
   AND Year = 08;
 
-/* Update Smith’s grade for class CS1310 in Fall 2008 to a B.
+/* 8 Update Smith’s grade for class CS1310 in Fall 2008 to a B.
 */
 UPDATE GRADE_REPORT
 		SET Grade = ‘B’
@@ -106,7 +106,7 @@ UPDATE GRADE_REPORT
 			AND Year = 08
 		}
 
-/* Delete all sections taught by Prof. Stone.
+/* 9 Delete all sections taught by Prof. Stone.
 */
 DELETE FROM SECTION
 WHERE Instructor = 'Stone';
