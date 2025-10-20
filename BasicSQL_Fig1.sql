@@ -63,7 +63,7 @@ ORDER BY s.year, s.semester, c.course_no, s.section_id;
 
 /* Insert a new student, <’Johnson’, 25, 1, ‘Math’>, in the database.
 */
-INSERT INTO STUDENT (name, Student_number, class, major)
+INSERT INTO STUDENT (Name, Student_number, class, major)
 VALUES ('Johnson', 25, 1, 'Math');
 
 /* Insert a new course, <’Object Oriented Programming’,’CS1210’, 3, ‘CS’>, in the database
@@ -80,7 +80,15 @@ WHERE Name = 'Smith';
 /* Update the instructor for session 112 in Fall 2008 to King.
 */
 UPDATE SECTION
-SET instructor = 'King'
+SET Instructor = 'King'
 WHERE Section_identifier = 112
   AND Semester = 'Fall'
   AND Year = 2008;
+
+/* Update Smith’s grade for class CS1310 in Fall 2008 to a B.
+*/
+
+/* Delete all sections taught by Prof. Stone.
+*/
+DELETE FROM SECTION
+WHERE Instructor = 'Stone';
