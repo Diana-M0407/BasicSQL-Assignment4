@@ -37,7 +37,7 @@ ORDER BY c.course_no, p.prereq_no;
 
 
 /*
-2. Retrieve all course numbers and names, along with their prerequisite course numbers and names.
+2.Retrieve all course numbers and names for courses taught by Professor Anderson in 2007 and 2008.
 */
 SELECT DISTINCT c.course_no, c.title
 FROM SECTION s
@@ -131,5 +131,4 @@ JOIN COURSE c_course  ON c_course.course_no  = p.course_no
 JOIN COURSE c_prereq  ON c_prereq.course_no  = p.prereq_no
 WHERE c_course.title  LIKE '%Database%'
   AND c_prereq.title  = 'Discrete Mathematics';
-
 
