@@ -37,7 +37,7 @@ ORDER BY c.course_no, p.prereq_no;
 
 
 /*
-2. Retrieve all course numbers and names, along with their prerequisite course numbers and names.
+2.Retrieve all course numbers and names for courses taught by Professor Anderson in 2007 and 2008.
 */
 SELECT DISTINCT c.course_no, c.title
 FROM SECTION s
@@ -106,12 +106,12 @@ UPDATE GRADE_REPORT
 			AND Year = 08
 		}
 
-/* 9 Delete all sections taught by Prof. Stone.
+/* 9. Delete all sections taught by Prof. Stone.
 */
 DELETE FROM SECTION
 WHERE Instructor = 'Stone';
 
-/* Remove the Discrete Mathematics prerequisite from a database course.
+/* 10.  Remove the Discrete Mathematics prerequisite from a database course.
 */
 DELETE FROM Prerequisite
 WHERE Course_number = 'CS3380'
