@@ -92,17 +92,17 @@ WHERE Section_identifier = 112
 /* 8 Update Smith’s grade for class CS1310 in Fall 2008 to a B.
 */
 UPDATE GRADE_REPORT
-		SET Grade = ‘B’
+		SET Grade = 'B'
 		WHERE Student_number = {
 			SELECT Student_number
 			FROM STUDENTS
-			WHERE Name = ‘Smith’
+			WHERE Name = 'Smith'
 		}
 		AND Section_identifier = {
 			SELECT Section_identifier
 			FROM SECTION
 			WHERE Course_number = 'CS1310'
-			AND Semester = ‘Fall’
+			AND Semester = 'Fall'
 			AND Year = 08
 		}
 
@@ -110,3 +110,9 @@ UPDATE GRADE_REPORT
 */
 DELETE FROM SECTION
 WHERE Instructor = 'Stone';
+
+/* Remove the Discrete Mathematics prerequisite from a database course.
+*/
+DELETE FROM Prerequisite
+WHERE Course_number = 'CS3380'
+  AND Prerequisite_number = 'Math2410';
