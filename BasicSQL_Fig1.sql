@@ -87,7 +87,7 @@ UPDATE SECTION
 SET Instructor = 'King'
 WHERE Section_identifier = 112
   AND Semester = 'Fall'
-  AND Year = 2008;
+  AND Year = 08;
 
 /* 
 8. Update Smith’s grade for class CS1310 in Fall 2008 to a B.
