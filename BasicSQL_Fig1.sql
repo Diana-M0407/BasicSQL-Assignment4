@@ -1,4 +1,13 @@
 /*
+Group Name: TuffyBase
+Team Lead: Diana Maldonado: { di.maldonado5504@csu.fullerton.edu }
+Group Members:
+Dylan Morales: { d.morales7241@csu.fullerton.edu } Jordan Mai: { mai.monkey9@gmail.com }
+Nikita Subedi: { 22subedin@csu.fullerton.edu } Steve Choi: { soondae@csu.fullerton.edu }
+*/
+
+
+/*
 Write the following queries based on the database schema in Figure 1.
 
     1. Retrieve all course numbers and names, along with their prerequisite course numbers and names.
@@ -12,8 +21,6 @@ Write the following queries based on the database schema in Figure 1.
     9. Delete all sections taught by Prof. Stone.
     10. Remove the Discrete Mathematics prerequisite from a database course.
 */
-
-
 
 
 /*
@@ -53,3 +60,4 @@ LEFT JOIN GRADE_REPORT gr ON gr.section_id = s.section_id   -- or ENROLL
 WHERE s.instructor = 'Anderson'
 GROUP BY c.course_no, s.semester, s.year, s.section_id
 ORDER BY s.year, s.semester, c.course_no, s.section_id;
+
