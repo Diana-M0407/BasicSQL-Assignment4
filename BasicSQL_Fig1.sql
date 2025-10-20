@@ -89,10 +89,47 @@ WHERE Section_identifier = 112
   AND Semester = 'Fall'
   AND Year = 2008;
 
-/* Update Smith’s grade for class CS1310 in Fall 2008 to a B.
+/* 
+8. Update Smith’s grade for class CS1310 in Fall 2008 to a B.
 */
+UPDATE GRADE_REPORT gr
+JOIN STUDENT s  ON s.student_id  = gr.student_id
+JOIN SECTION sec ON sec.section_id = gr.section_id
+JOIN COURSE c   ON c.course_no   = sec.course_no
+SET gr.grade = 'B'
+WHERE s.sname = 'Smith'
+  AND c.course_no = 'CS1310'
+  AND sec.semester = 'Fall'
+  AND sec.year = 2008;
 
-/* Delete all sections taught by Prof. Stone.
+
+
+/* 
+9. Delete all sections taught by Prof. Stone.
 */
 DELETE FROM SECTION
 WHERE Instructor = 'Stone';
+/*
+DELETE gr
+FROM GRADE_REPORT gr
+JOIN SECTION s ON s.section_id = gr.section_id
+WHERE s.instructor = 'Stone';
+
+DELETE FROM SECTION
+WHERE instructor = 'Stone';
+*/
+
+
+
+/*
+10. Remove the Discrete Mathematics prerequisite from a database course.
+*/
+
+DELETE p
+FROM PREREQUISITE p
+JOIN COURSE c_course  ON c_course.course_no  = p.course_no
+JOIN COURSE c_prereq  ON c_prereq.course_no  = p.prereq_no
+WHERE c_course.title  LIKE '%Database%'
+  AND c_prereq.title  = 'Discrete Mathematics';
+
+
