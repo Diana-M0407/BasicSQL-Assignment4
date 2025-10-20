@@ -83,10 +83,24 @@ UPDATE SECTION
 SET Instructor = 'King'
 WHERE Section_identifier = 112
   AND Semester = 'Fall'
-  AND Year = 2008;
+  AND Year = 08;
 
 /* Update Smith’s grade for class CS1310 in Fall 2008 to a B.
 */
+UPDATE GRADE_REPORT
+		SET Grade = ‘B’
+		WHERE Student_number = {
+			SELECT Student_number
+			FROM STUDENTS
+			WHERE Name = ‘Smith’
+		}
+		AND Section_identifier = {
+			SELECT Section_identifier
+			FROM SECTION
+			WHERE Course_number = 'CS1310'
+			AND Semester = ‘Fall’
+			AND Year = 08
+		}
 
 /* Delete all sections taught by Prof. Stone.
 */
